@@ -1,0 +1,9 @@
+{% extends 'learning_logs/base.html' %}
+{% block content %}
+<div class="scaled-page">
+    <h2>Account Activated!</h2>
+    <p class="text-success">Your email has been successfully verified</p>
+    <p>You can now log into your account and start adding your learning logs.</p>
+    <a href="{% url 'login' %}" class="btn btn-success mt-3">Log in now</a>
+</div>
+{% endblock %}

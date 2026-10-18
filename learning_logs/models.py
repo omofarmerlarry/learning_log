@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import math
+
 class Topic(models.Model):
     text= models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -11,6 +13,10 @@ class Entry(models.Model):
     topic = models.ForeignKey(Topic,on_delete=models.CASCADE)
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    def read_time(self):
+        word_count=len(self.text.split())
+        minutes = math.ceil(word_count / 200)
+        return max(minutes, 1)
 
     class Meta:
         verbose_name_plural = "Entries"

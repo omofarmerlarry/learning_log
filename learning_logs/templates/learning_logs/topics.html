@@ -1,13 +1,71 @@
-{% extends "learning_logs/base.html" %}
-{%block content%}
-<p>Topics</p>
-<ul>
-    {%for topic in topics_learnt %}
-        <li><a href="{% url 'learning_logs:topic' topic.id %}">{{topic.text}}</a>
-        </li>
-    {%empty%}
-        <li>No topics have been added yet.</li>
-    {%endfor%}
-</ul>
-<a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
-{%endblock content%}
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+<div class="scaled-page">
+    <h2>Learning Log</h2>
+
+    <!-- Instant Search & Auto-Dropdown -->
+    <div class="dropdown mb-4">
+        <label for="topicSearchInput" class="form-label fw-bold">Search Topics</label>
+        <input type="text" id="topicSearchInput" class="form-control dropdown-toggle" placeholder="Type to search topics..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
+
+        <ul id="topicDropdownList" class="dropdown-menu w-100 shadow-sm" aria-labelledby="topicSearchInput">
+            {% for topic in topics_learnt %}
+                <li><a class="dropdown-item topic-item" href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a></li>
+            {% empty %}
+                <li><span class="dropdown-item text-muted">No topics found</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h3>All Topics</h3>
+    <ul>
+        {% for topic in topics_learnt %}
+            <li>
+                <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>
+            </li>
+        {% empty %}
+            <li>There are no topics added yet.</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a></p>
+</div>
+
+<!-- JavaScript to handle instant filtering and auto-opening the dropdown -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("topicSearchInput");
+        const dropdownList = document.getElementById("topicDropdownList");
+        const dropdown = new bootstrap.Dropdown(searchInput);
+        const items = dropdownList.querySelectorAll(".topic-item");
+
+        // Open dropdown when focusing or typing
+        searchInput.addEventListener("focus", function () {
+            dropdown.show();
+        });
+
+        searchInput.addEventListener("input", function () {
+            const query = searchInput.value.toLowerCase();
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.parentElement.style.display = "block";
+                } else {
+                    item.parentElement.style.display = "none";
+                }
+            });
+
+            dropdown.show();
+        });
+
+        // Close dropdown when clicking outside of the search container
+        document.addEventListener("click", function (event) {
+            if (!searchInput.contains(event.target) && !dropdownList.contains(event.target)) {
+                dropdown.hide();
+            }
+        });
+    });
+</script>
+{% endblock content %}
