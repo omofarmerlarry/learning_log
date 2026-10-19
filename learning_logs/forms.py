@@ -1,5 +1,7 @@
 from django import forms
 from .models import Topic, Entry
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import User
 
 
 class TopicForm(forms.ModelForm):
