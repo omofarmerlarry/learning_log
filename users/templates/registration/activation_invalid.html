@@ -1,0 +1,8 @@
+{% extends 'learning_logs/base.html' %}
+{% block content %}
+<div class="scaled-page">
+    <h2>Activation Failed</h2>
+    <p class="text-danger">The activation link is invalid, has expired, or has already been used.</p>
+    <p>Please try registering again or contact support.</p>
+    <a href="{% url 'learning_logs:index' %}" class="btn btn-secondary mt-3">Return Home</a>
+</div>
