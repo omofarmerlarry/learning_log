@@ -11,19 +11,17 @@ A full-stack Django web application designed to help users log, organize, and tr
 
 ## 🌟 Features
 
-- **User Authentication & Authorization:** Secure user registration, login, and logout mechanics ensuring complete user data isolation.
-- **Topic & Entry Management:** Create custom learning topics and append timestamped, detailed journal entries.
-- **RESTful Architecture:** Clear URL patterns for creating, viewing, and modifying topics and entries.
-- **Responsive UI:** Clean frontend styled using modern template inheritance and Bootstrap components.
+- **User Authentication & Authorization:** Secure user registration, login, and logout mechanics using custom Django forms (email/SMTP integration removed for streamlined local and production setup) ensuring complete user data isolation.
+- **Topic & Entry Management:** Full CRUD capability to create custom learning topics and append detailed journal entries with custom inline deletion flows.
+- **Markdown & Reading Time Support:** Write and view rich entry contents formatted with Markdown syntax, paired with automatic reading time estimates (in minutes) for each log.
 - **Production Ready:** Configured for cloud production environments with secure environment variables and static asset handling via Gunicorn.
-
+- **Responsive UI:** Clean frontend styled using modern template inheritance and Bootstrap components.
 ---
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Python, Django
-- **Frontend:** HTML5, CSS3, Bootstrap 5, Django Template Language (DTL)
-- **Database:** SQLite (Development)
+- **Backend:** Python, Django 5.x
+- **Frontend:** HTML5, Custom CSS3, Bootstrap 5, Django Template Language (DTL), Markdown
 - **Production WSGI Server:** Gunicorn
 - **Version Control:** Git, GitHub
 - **Hosting & Cloud Deployment:** Render
